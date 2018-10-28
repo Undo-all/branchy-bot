@@ -1,0 +1,2 @@
+[workspace]
+members = ["branchy-attrib", "branchy-bot"]

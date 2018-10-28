@@ -1,0 +1,12 @@
+[package]
+name = "branchy-bot"
+version = "0.1.0"
+authors = ["Undo-all <undoall2@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+log = "0.4"
+env_logger = "0.5.13"
+serenity = "0.5"
+branchy-attrib = { path = "../branchy-attrib" }
+diesel = { version = "1.3.3", features = ["sqlite"] }
