@@ -1,7 +1,7 @@
-use std::io;
-use std::str;
-use std::process::Command;
 use log::info;
+use std::io;
+use std::process::Command;
+use std::str;
 
 use serenity::command;
 
@@ -9,9 +9,9 @@ const WOLFRAMSCRIPT_PATH: &'static str = "wolframscript.exe";
 
 fn execute(code: String) -> io::Result<String> {
     let output = Command::new(WOLFRAMSCRIPT_PATH)
-                      .arg("-code")
-                      .arg(code)
-                      .output()?;
+        .arg("-code")
+        .arg(code)
+        .output()?;
     //let output = cmd.output()?;
     let stdout = str::from_utf8(&output.stdout).expect("Invalid UTF8 in Mathematica output!");
     let result = stdout.lines().last().unwrap_or("");

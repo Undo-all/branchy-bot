@@ -1,15 +1,15 @@
 #![feature(nll)]
 #![feature(custom_attribute)]
 
-use serenity::prelude::*;
+use serenity::command;
+use serenity::framework::StandardFramework;
 use serenity::model::channel::Message;
 use serenity::model::gateway::Ready;
-use serenity::framework::StandardFramework;
-use serenity::command;
+use serenity::prelude::*;
 
-use std::env;
 use env_logger::*;
-use log::{info};
+use log::info;
+use std::env;
 
 use std::collections::HashMap;
 
@@ -32,15 +32,17 @@ fn main() {
     let token = env::var("DISCORD_TOKEN").expect("Expected a token");
     let mut client = Client::new(&token, Handler).expect("Couldn't create client");
 
-    client.with_framework(StandardFramework::new()
-        .configure(|c| c.prefix("%%"))
-        .command("sentiment", |c| c.cmd(mathematica::sentiment))
-        .command("spam", |c| c.cmd(mathematica::spam))
-        .command("language", |c| c.cmd(mathematica::language))
-        .command("profane", |c| c.cmd(mathematica::profane))
-        .command("topic", |c| c.cmd(mathematica::topic))
-        .command("fortune", |c| c.cmd(fortune::fortune))
-        .command("emojify", |c| c.cmd(emojify::Emojify::new())));
+    client.with_framework(
+        StandardFramework::new()
+            .configure(|c| c.prefix("%%"))
+            .command("sentiment", |c| c.cmd(mathematica::sentiment))
+            .command("spam", |c| c.cmd(mathematica::spam))
+            .command("language", |c| c.cmd(mathematica::language))
+            .command("profane", |c| c.cmd(mathematica::profane))
+            .command("topic", |c| c.cmd(mathematica::topic))
+            .command("fortune", |c| c.cmd(fortune::fortune))
+            .command("emojify", |c| c.cmd(emojify::Emojify::new())),
+    );
 
     if let Err(why) = client.start() {
         println!("Aaaah it's broken: {:?}", why);

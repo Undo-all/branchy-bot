@@ -1,5 +1,5 @@
-use std::process::Command;
 use serenity::command;
+use std::process::Command;
 use std::str;
 
 const FORTUNE: &'static str = "fortune";
